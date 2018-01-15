@@ -1,0 +1,17 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /home/eason/www/hw01.eason.space;
+
+        index index.html;
+
+        server_name hw01.eason.space;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+}
+
