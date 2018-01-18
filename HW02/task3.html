@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>hw02-task3</title>
+		<style>
+			.header {
+				font-size: large;  
+				border: none;
+				text-align: center;
+			}
+			.container{
+				height: 100%;
+				display: flex;
+			}
+			.links {
+				float: left;
+				width: 33%;
+				border-right: 2px solid grey;
+				text-align:center;
+			}
+			.link {
+				background: none;
+				border: none;
+				padding: 10px;
+				font-family: serif;
+				font-size: 10px;
+			}
+			.content {
+				width: 66%;
+				float: left;
+				display: flex;
+				padding: 10px;
+				font-size: 10px;
+			}
+			#p2, #p3 {
+				display:none;
+			}
+			
+		</style>
+		<script>
+			function showPara(id) {
+				var p1=document.getElementById("p1");
+				var p2=document.getElementById("p2");
+				var p3=document.getElementById("p3");
+
+				if (id==1) {
+					p1.style.display="block";
+					p2.style.display="none";
+					p3.style.display="none";
+				}
+				else if (id==2) {
+					p2.style.display="block";
+					p1.style.display="none";
+					p3.style.display="none";
+				}
+				else {
+					p3.style.display="block";
+					p1.style.display="none";
+					p2.style.display="none";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="header">
+			<h1>HW03 Task Three</h1>
+		</div>
+		<div class="clearfix container">
+			<div class="links">
+				<button class="link" onclick="showPara(1)">Lorem Ipsem</button><br>
+				<button class="link" onclick="showPara(2)">99 Bottles</button><br>
+				<button class="link" onclick="showPara(3)">Last Thing</button>
+			</div>
+
+			<div class="content" id="p1">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div>
+			
+			<div class="content" id="p2">
+				99 bottles of beer on the wall, 99 bottles of beer. Take one down, pass it around, 98 bottles of beer on the wall.Take one down, pass it around, 97 bottles of beer on the wall. Take one down, pass it around, 96 bottles of beer on the wall.
+			</div>
+
+			<div class="content" id="p3">
+				this is the third things
+			</div>
+
+		</div>
+	</body>
+</html>

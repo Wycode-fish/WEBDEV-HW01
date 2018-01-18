@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>hw02-task2</title>
+		<script>
+			
+			function popUp() {
+				var defNum = document.getElementById("defNum");
+				alert(defNum.innerHTML);
+			}
+
+			function incre() {
+				var defNum = document.getElementById("defNum");
+				defNum.innerHTML=parseInt(defNum.innerHTML)+1;
+			}
+
+			function appendPara() {
+				var defNum = document.getElementById("defNum");
+				var para = document.createElement("p");
+				var text = document.createTextNode(defNum.innerHTML);
+				para.appendChild(text);
+				document.body.appendChild(para);
+			}
+		</script>
+	</head>
+	<body>
+		<h1 id="defNum">10</h1>
+		<input type="button" value="pop up alert" onclick="popUp()" />
+		<input type="button" value="increment" onclick="incre()"/>
+		<input type="button" value="append paragragh" onclick="appendPara()"/>
+	</body>
+</html>
