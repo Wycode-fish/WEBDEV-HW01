@@ -4,34 +4,39 @@
 		<meta charset="utf-8">
 		<title>hw02-task3</title>
 		<style>
+			html, body{
+				height:100%;
+			}
 			.header {
+				background-color: #FFF8D7;
 				font-size: large;  
 				border: none;
 				text-align: center;
+				padding: 10px;
 			}
 			.container{
-				height: 100%;
+				height:100%;
 				display: flex;
 			}
 			.links {
 				float: left;
 				width: 33%;
-				border-right: 2px solid grey;
+				border-right: 2px solid #C4E1FF;
 				text-align:center;
+				background-color: #ECF5FF;
 			}
 			.link {
-				background: none;
-				border: none;
+				list-style-type: none;
 				padding: 10px;
 				font-family: serif;
-				font-size: 10px;
+				font-size: 18px;
 			}
 			.content {
 				width: 66%;
 				float: left;
-				display: flex;
+				height: 100%;
 				padding: 10px;
-				font-size: 10px;
+				font-size: 13px;
 			}
 			#p2, #p3 {
 				display:none;
@@ -66,23 +71,37 @@
 		<div class="header">
 			<h1>HW03 Task Three</h1>
 		</div>
-		<div class="clearfix container">
+		<div class="container">
 			<div class="links">
-				<button class="link" onclick="showPara(1)">Lorem Ipsem</button><br>
-				<button class="link" onclick="showPara(2)">99 Bottles</button><br>
-				<button class="link" onclick="showPara(3)">Last Thing</button>
+				<ul class="ulNoDot">
+					<li class="link"><a href="javascript: showPara(1)">Lorem Ipsem</a></li>
+					<li class="link"><a href="javascript: showPara(2)">99 Bottles</a></li>
+					<li class="link"><a href="javascript: showPara(3)">Last Thing</a></li>
+				</ul>
 			</div>
 
 			<div class="content" id="p1">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh nunc, molestie quis dui et, tincidunt pharetra felis. Nulla facilisi. Donec tempus enim a tortor pellentesque, non tempus ante accumsan. Phasellus sodales lectus semper nunc mattis, vel eleifend odio pellentesque. Proin pretium purus id risus vestibulum sodales sed in nibh. Ut quis lectus quis massa vehicula hendrerit. Integer et commodo arcu. Aliquam consequat purus a pulvinar hendrerit. Aliquam erat volutpat. Pellentesque ante sapien, mattis ac tempor et, blandit nec lectus. Aenean sit amet arcu eros.</p>
+
+				<p>Morbi lacus nisl, accumsan vitae maximus quis, ornare eu nulla. Nullam velit eros, suscipit vel semper et, ullamcorper sed urna. Praesent vel augue vitae leo auctor maximus eget et purus. Quisque in eros et sapien mattis ultricies quis at quam. Vestibulum scelerisque nulla vitae ipsum luctus, a sodales enim convallis. Vivamus tincidunt scelerisque porta. Vivamus sed nibh id lectus tincidunt pretium vitae vel felis. Pellentesque tincidunt nisi ac volutpat rhoncus. Vestibulum ligula</p>
+
+				<p>Morbi lacus nisl, accumsan vitae maximus quis, ornare eu nulla. Nullam velit eros, suscipit vel semper et, ullamcorper sed urna. Praesent vel augue vitae leo auctor maximus eget et purus. Quisque in eros et sapien mattis ultricies quis at quam. Vestibulum scelerisque nulla vitae ipsum luctus, a sodales enim convallis. Vivamus tincidunt scelerisque porta. Vivamus sed nibh id lectus tincidunt pretium vitae vel felis. Pellentesque tincidunt nisi ac volutpat rhoncus. Vestibulum ligula nulla, lobortis sit amet posuere id, venenatis at arcu.</p>
+
+				<p>Vivamus porta imperdiet mattis. Maecenas orci mi, dapibus sed posuere rhoncus, accumsan sed arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus hendrerit velit elementum efficitur placerat. Curabitur eu commodo sapien, et fermentum lorem. Cras mattis malesuada nibh at laoreet. Duis eleifend eu elit et porttitor. Pellentesque volutpat venenatis magna, ac aliquam augue malesuada nec. Proin condimentum sem ante, ut tempus lacus volutpat non. Ut et pretium leo.</p>
 			</div>
 			
 			<div class="content" id="p2">
-				99 bottles of beer on the wall, 99 bottles of beer. Take one down, pass it around, 98 bottles of beer on the wall.Take one down, pass it around, 97 bottles of beer on the wall. Take one down, pass it around, 96 bottles of beer on the wall.
+				99 bottles of beer on the wall, 99 bottles of beer. 
+				<br>
+				Take one down, pass it around, 98 bottles of beer on the wall.
+				<br>
+				Take one down, pass it around, 97 bottles of beer on the wall. 
+				<br>
+				Take one down, pass it around, 96 bottles of beer on the wall.
 			</div>
 
 			<div class="content" id="p3">
-				this is the third things
+				this is the third things.
 			</div>
 
 		</div>
