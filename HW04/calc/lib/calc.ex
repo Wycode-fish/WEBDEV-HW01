@@ -2,14 +2,13 @@ defmodule Calc do
 
   def eval(expression) do
     if expression|>String.length==1 and expression|>isNumeric? do
-      IO.puts expression;
+      expression;
     else
       expression = expression|>String.trim
                       |>String.split("(")|>concatParen("(")
                       |>String.split(")")|>concatParen(")");
-      result = expression|>String.trim|>String.split(" ")
-                |>removeParen([])|>calculate
-      IO.puts Float.to_string(result);
+      expression|>String.trim|>String.split(" ")
+                |>removeParen([])|>calculate|>Float.to_string;
     end
   end
 
@@ -186,7 +185,8 @@ defmodule Calc do
     if expr == "" do
       main();
     else
-      expr|>eval;
+      result = expr|>eval;
+      IO.puts result;
       main();
     end
   end
