@@ -7,8 +7,12 @@ defmodule Calc do
       expression = expression|>String.trim
                       |>String.split("(")|>concatParen("(")
                       |>String.split(")")|>concatParen(")");
-      expression|>String.trim|>String.split(" ")
-                |>removeParen([])|>calculate|>Float.to_string;
+      if expression|>String.trim|>String.split(" ")|>valid?() do
+        expression|>String.trim|>String.split(" ")
+                  |>removeParen([])|>calculate|>Float.to_string;
+      else
+        "oops, invalid expression."
+      end
     end
   end
 
@@ -54,6 +58,51 @@ defmodule Calc do
                 |>Float.to_string|>List.wrap;
       storage++resultWrap;
     end
+  end
+
+  def parenMatch?(exprList, stk) do
+    if (exprList|>Enum.empty?) do
+      stk|>Enum.empty?;
+    else
+      cond do
+        exprList|>Enum.at(0) == "(" ->
+          parenMatch?(exprList|>Enum.slice(1..-1), stk++List.wrap("("));
+        exprList|>Enum.at(0) == ")" ->
+          parenMatch?(exprList|>Enum.slice(1..-1), stk|>Enum.slice(0..-2));
+        true ->
+          parenMatch?(exprList|>Enum.slice(1..-1), stk);
+      end
+    end
+  end
+
+  def valid?(exprList) do
+    match? =  parenMatch?(exprList, []);
+    details? = detailValid?(exprList);
+    match? and details?;
+  end
+
+  def detailValid?(exprList) do
+    cond do
+      exprList|>Enum.count == 1 ->
+        true;
+      exprList|>Enum.at(0) == "(" ->
+        isNumeric?(exprList|>Enum.at(1)) and detailValid?(exprList|>Enum.slice(1..-1));
+      exprList|>Enum.at(0) == ")" ->
+        exprList|>Enum.at(1)!="(" and detailValid?(exprList|>Enum.slice(1..-1));
+      isOperator?(exprList|>Enum.at(0)) ->
+        rightParen? = exprList|>Enum.at(1)==")";
+        operator? = exprList|>Enum.at(1)|>isOperator?;
+        (not rightParen?) and (not operator?) and detailValid?(exprList|>Enum.slice(1..-1));
+      isNumeric?(exprList|>Enum.at(0)) ->
+        num? = isNumeric?(exprList|>Enum.at(1));
+        (not num?) and detailValid?(exprList|>Enum.slice(1..-1));
+      true ->
+        detailValid?(exprList|>Enum.slice(1..-1));
+    end
+  end
+
+  def isOperator?(str) do
+    str=="+" or str=="-" or str=="*" or str=="/";
   end
 
   def findRightMatchIdx(exprList, left, right, idx) do
