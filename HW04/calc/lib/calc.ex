@@ -1,17 +1,26 @@
 defmodule Calc do
 
+  def intOrFloat(fnum) do
+    floorInt = fnum|>Float.floor|>Float.to_string|>Integer.parse|>elem(0);
+    if floorInt == fnum do
+      floorInt;
+    else
+      fnum;
+    end
+  end
+
   def eval(expression) do
     if expression|>String.length==1 and expression|>isNumeric? do
-      expression;
+      expression|>Float.parse;
     else
       expression = expression|>String.trim
                       |>String.split("(")|>concatParen("(")
                       |>String.split(")")|>concatParen(")");
       if expression|>String.trim|>String.split(" ")|>valid?() do
         expression|>String.trim|>String.split(" ")
-                  |>removeParen([])|>calculate|>Float.to_string;
+                  |>removeParen([])|>calculate;
       else
-        "oops, invalid expression."
+        nil;
       end
     end
   end
@@ -28,7 +37,6 @@ defmodule Calc do
     if Enum.empty?(exprList) do
       storage;
     else
-
       fst = List.first(exprList);
       cond do
         not isParenthesis?(fst) ->
@@ -86,16 +94,20 @@ defmodule Calc do
       exprList|>Enum.count == 1 ->
         true;
       exprList|>Enum.at(0) == "(" ->
-        isNumeric?(exprList|>Enum.at(1)) and detailValid?(exprList|>Enum.slice(1..-1));
+        isNumeric?(exprList|>Enum.at(1))
+                  and detailValid?(exprList|>Enum.slice(1..-1));
       exprList|>Enum.at(0) == ")" ->
-        exprList|>Enum.at(1)!="(" and detailValid?(exprList|>Enum.slice(1..-1));
+        exprList|>Enum.at(1)!="("
+                  and detailValid?(exprList|>Enum.slice(1..-1));
       isOperator?(exprList|>Enum.at(0)) ->
         rightParen? = exprList|>Enum.at(1)==")";
         operator? = exprList|>Enum.at(1)|>isOperator?;
-        (not rightParen?) and (not operator?) and detailValid?(exprList|>Enum.slice(1..-1));
+        (not rightParen?) and (not operator?)
+                          and detailValid?(exprList|>Enum.slice(1..-1));
       isNumeric?(exprList|>Enum.at(0)) ->
         num? = isNumeric?(exprList|>Enum.at(1));
-        (not num?) and detailValid?(exprList|>Enum.slice(1..-1));
+        (not num?)
+            and detailValid?(exprList|>Enum.slice(1..-1));
       true ->
         detailValid?(exprList|>Enum.slice(1..-1));
     end
@@ -235,7 +247,12 @@ defmodule Calc do
       main();
     else
       result = expr|>eval;
-      IO.puts result;
+      if result != nil do
+        newResult = result|>intOrFloat;
+        IO.puts newResult;
+      else
+        IO.puts "expression error."
+      end
       main();
     end
   end
