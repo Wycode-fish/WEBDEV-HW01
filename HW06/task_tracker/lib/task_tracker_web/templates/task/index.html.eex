@@ -1,0 +1,49 @@
+<h2>Listing Tasks</h2>
+<style>
+  th,td {
+    text-align:center;
+  }
+</style>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Is finish</th>
+      <th>Total time(mins)</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for task <- @tasks do %>
+    <tr>
+      <td><%= task.title %></td>
+      <td><%= task.description %></td>
+      <!--<td><%= task.start_time %></td>-->
+      <%= if task.is_finish do %>
+        <td style="background-color:powderblue;"><%= "Yes" %></td>
+      <% else %>
+        <td style="background-color:#ffb6c1;"><%= "No" %></td>
+      <% end %>
+
+      <!-- <td><%= (((task.end_time-task.start_time)/60/15)|>round)*15 %></td> -->
+      <%= if not task.is_finish do %>
+        <td><%= "-" %></td>
+      <% else %>
+        <td><%= (((task.end_time-task.start_time)/60/15)|>round)*15 %></td>
+      <% end %>
+
+      <td class="text-right">
+        <span><%= link "Show", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span>
+        <%= if not task.is_finish and @current_user.id==task.assignee_id do %>
+          <span><%= link "Edit", to: task_path(@conn, :edit, task), class: "btn btn-default btn-xs" %></span>
+        <% end %>
+        <span><%= link "Delete", to: task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span class="new-task-link"><%= link "New Task", to: task_path(@conn, :new) %></span>

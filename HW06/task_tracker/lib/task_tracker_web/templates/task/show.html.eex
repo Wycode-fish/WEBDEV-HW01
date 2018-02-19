@@ -1,0 +1,60 @@
+<h2>Show Task</h2>
+
+<ul>
+  <li>
+    <strong>Title:</strong>
+    <%= @task.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @task.description %>
+  </li>
+
+  <li>
+    <strong>Start time:</strong>
+    <%= ((:os.system_time(:second)-@task.start_time)/60)|>round %> mins ago
+  </li>
+
+  <li>
+    <strong>End time:</strong>
+    <%= if @task.is_finish do %>
+      <%= @task.end_time %>
+    <% else %>
+      <%= "-" %>
+    <% end %>
+  </li>
+
+  <li>
+    <strong>Total time:</strong>
+    <%= if @task.is_finish do %>
+      <%= (((@task.end_time-@task.start_time)/60/15)|>round)*15 %>
+    <% else %>
+      <%= "-" %>
+    <% end %>
+
+
+  </li>
+
+  <li>
+    <strong>Is finish:</strong>
+    <%= @task.is_finish %>
+  </li>
+
+  <li>
+    <strong>Creator:</strong>
+    <%= @task.creator.name %>
+  </li>
+
+  <li>
+    <strong>Assignee:</strong>
+    <%= @task.assignee.name %>
+  </li>
+
+
+
+</ul>
+<%= if not @task.is_finish and @current_user.id==@task.assignee_id do %>
+  <span><%= link "Edit", to: task_path(@conn, :edit, @task) %></span>
+<% end %>
+<span><%= link "Back", to: task_path(@conn, :index) %></span>
